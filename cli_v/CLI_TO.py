@@ -31,14 +31,16 @@ def print_tasks(tasks):
   for task in tasks:
     print(task)
 
+def write_tasks(tasks,filename):
+  with open(filename, 'w') as f:
+    json.dump(tasks, f, indent=3)
+
 if os.path.exists(file_name) and os.path.getsize(file_name)>0:
   with open(file_name, "r") as f:
     tasks = json.load(f)
     index = tasks[-1]["id"] + 1
 else:
   tasks = []
-
-
 
 parser = argparse.ArgumentParser(description="A to do list app")
 subparsers = parser.add_subparsers(dest="command")
@@ -66,7 +68,7 @@ mark_done_parser.add_argument("id")
 
 # List command
 list_parser = subparsers.add_parser("list", help="List tasks")
-# Change status
+list_parser.add_argument("--filter")
 
 args = parser.parse_args()
 
@@ -74,19 +76,13 @@ if args.command == "add":
   temp = Task(index, args.name, args.description, datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),"Not done")
   index += 1
   tasks.append(temp.to_dict())
-  with open (file_name, "w") as f1:
-    json.dump(tasks,f1,indent=4)
 
 elif args.command == "update":
   for i in range(len(tasks)):
     if tasks[i]["id"] == int(args.id):
-      tasks[i]["description"] = args.description
+      tasks[i]["description"] = args.description  
   
-  for i in range(len(tasks)):
-    print(tasks[i])
- 
 elif args.command == "delete":
-  # tasks.pop(int(args.id))
   for i in range(len(tasks)):
     if tasks[i]["id"] == int(args.id):
       tasks.pop(i)
@@ -102,7 +98,14 @@ elif args.command == "mark_in_progress":
       tasks[i]["status"] = "InProgress"
 
 elif args.command == "list":
-  for i in range(len(tasks)):
-    print(tasks[i])
-    
-print_tasks(tasks)
+  if args.filter == "Done":
+    for i in range(len(tasks)):
+      if tasks[i]["status"] == "Done":
+        print(tasks[i])
+  elif args.filter == "Inprogress":
+    for i in range(len(tasks)):
+      if tasks[i]["status"] == "InProgress":
+        print(tasks[i])
+
+
+write_tasks(tasks,file_name)
