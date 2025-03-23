@@ -1,20 +1,16 @@
 [
     {
         "id": 0,
-        "name": "bego",
-        "description": "testsubject",
-        "joined_date": "2025-03-23 14:50"
+        "name": "Begad",
+        "description": "i love prog",
+        "joined_date": "2025-03-23 15:21",
+        "status": "Not done"
     },
     {
         "id": 1,
-        "name": "sofy",
-        "description": "testsubject",
-        "joined_date": "2025-03-23 14:50"
-    },
-    {
-        "id": 2,
-        "name": "sofy",
-        "description": "test for description",
-        "joined_date": "2025-03-23 14:50"
+        "name": "Sofian",
+        "description": "i love pharma",
+        "joined_date": "2025-03-23 15:21",
+        "status": "Not done"
     }
 ]
