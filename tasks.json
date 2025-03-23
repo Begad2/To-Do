@@ -1,2 +1,9 @@
 [
-    
+   {
+      "id": 0,
+      "name": "Begad",
+      "description": "i love prog",
+      "joined_date": "2025-03-23 17:08",
+      "status": "Not done"
+   }
+]

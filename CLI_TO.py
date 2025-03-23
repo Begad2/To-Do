@@ -25,7 +25,7 @@ class Task:
   
 
 index = 0
-file_name = "./cli_v/tasks.json"
+file_name = "./tasks.json"
 
 def print_tasks(tasks):
   for task in tasks:
